@@ -24,6 +24,7 @@ void MyCallbacks::onWrite(BLECharacteristic *pCharacteristic) {
 BLEManager::BLEManager() {
   // Create the BLE Device
   BLEDevice::init("Contactile Sensor M5");
+  deviceConnected = false;
 
   // Create the BLE Server
   pServer = BLEDevice::createServer();

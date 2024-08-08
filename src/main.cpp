@@ -4,6 +4,8 @@
 
 #include "BLEManager.h"
 
+#define LCD_WIDTH 320
+#define LCD_LINE_HEIGHT 20
 #define SENSOR_PIN 36
 
 BLEManager *ble;
@@ -30,8 +32,13 @@ void loop() {
   int32_t value = (int32_t)analogRead(SENSOR_PIN);
   //   Serial.println(value);
   ble->writeSensorValue(value);
-  auto curY = M5.Lcd.getCursorY();
-  M5.Lcd.setCursor(0, curY);
-  M5.Lcd.printf("%05d", value);
+
+  M5.Lcd.setCursor(0, 26 * 2);
+  M5.Lcd.println(ble->deviceConnected ? "OK" : "NG");
+  M5.Lcd.printf("%04d", value);
+
+  auto data = (int32_t)((value / 4096.0) * LCD_WIDTH);
+  M5.Lcd.fillRect(0, 26 * 4, data, LCD_LINE_HEIGHT, GREEN);
+  M5.Lcd.fillRect(data, 26 * 4, LCD_WIDTH - data, LCD_LINE_HEIGHT, BLACK);
   vTaskDelay(10);
 }

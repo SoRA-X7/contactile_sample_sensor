@@ -15,11 +15,11 @@ class BLEManager {
  public:
   BLEManager();
   void writeSensorValue(int32_t val);
+  bool deviceConnected;
 
  private:
   BLEServer *pServer;
   BLECharacteristic *chSensorValue;
-  bool deviceConnected;
 };
 
 class MyServerCallbacks : public BLEServerCallbacks {
