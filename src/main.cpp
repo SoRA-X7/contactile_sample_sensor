@@ -12,7 +12,7 @@ BLEManager *ble;
 
 void setup() {
   M5.begin();
-  pinMode(SENSOR_PIN, INPUT_PULLUP);
+  pinMode(SENSOR_PIN, INPUT_PULLDOWN);
   Serial.begin(115200);
 
   // ノイズ対策

@@ -35,7 +35,7 @@ BLEManager::BLEManager() {
 
   // Create a BLE Characteristic
   chSensorValue = pService->createCharacteristic(
-      CH_UUID_SENSOR_VALUE, BLECharacteristic::PROPERTY_READ);
+      CH_UUID_SENSOR_VALUE, BLECharacteristic::PROPERTY_NOTIFY);
   double val = 0;
   chSensorValue->setValue(val);
 
@@ -50,5 +50,6 @@ BLEManager::BLEManager() {
 void BLEManager::writeSensorValue(int32_t value) {
   if (chSensorValue != NULL) {
     chSensorValue->setValue(value);
+    chSensorValue->notify();
   }
 }
